@@ -18,8 +18,11 @@ public class ProcessUtil {
 	public static void processInputParams() {
 		
 		//TODO process these feilds according to Input args
-		String jarName="spring-core-4.0.4.RELEASE.jar";
+		String jarName="poi-examples-4.0.1.jar";
 		String baseDir="D:\\PlayGround\\Test";
+		
+		
+		
 		String extractDir=baseDir+"\\extracted";
 		String destDir=baseDir+"\\dest";
 	
@@ -70,21 +73,26 @@ public class ProcessUtil {
 			f.mkdirs();
 		}
 	
-		File noticeFile= new File(licDirStruct+FieldConstants.NOTICE_TXT);
 	
 		Path sorcePath=new File(getAppCache().getValueFromReqFeilds(FieldConstants.NOTICE)).toPath();
-	
+		
+		File noticeFile= new File(licDirStruct+sorcePath.getFileName());
+		
 		Files.copy(sorcePath, noticeFile.toPath(),StandardCopyOption.REPLACE_EXISTING);
 	
-		File licenseFile= new File(licDirStruct+FieldConstants.LICENSE_TXT);
 	
 		sorcePath=new File(getAppCache().getValueFromReqFeilds(FieldConstants.LICENSE)).toPath();
-	
+		
+		File licenseFile= new File(licDirStruct+sorcePath.getFileName());
+		
 		Files.copy(sorcePath, licenseFile.toPath(),StandardCopyOption.REPLACE_EXISTING);
+		
+		
 	
 		File jarFile= new File(binDirStruct+getAppCache().getValueFromReqFeilds(DirConstants.JARNAME));
 	
 		sorcePath=new File(getAppCache().getValueFromReqFeilds(DirConstants.BASEDIR)+File.separator+getAppCache().getValueFromReqFeilds(DirConstants.JARNAME)).toPath();
+		
 		Files.copy(sorcePath, jarFile.toPath(),StandardCopyOption.REPLACE_EXISTING);
 	}
 
